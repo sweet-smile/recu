@@ -1,9 +1,9 @@
 <template>
 
   <div class="hello ">
-    <img src="http://assist.jd.com/job/static/img/logo.e7983d2.png" alt="">
-    <span class="email">简历接收邮箱：<span class="email1">chenjian@jd.com</span></span>
-    <p class="email2">changfangfang@jd.com</p>
+    <img src="https://assist.jd.com/job/static/img/logo.e7983d2.png" alt="">
+    <span class="email">简历接收邮箱：<span class="email1">guojia3@jd.com</span></span>
+    <p class="email2">yinnan@jd.com</p>
   <ul class="clearfix title" >
     <li class="tab " v-for="(item,index) in job" :class="{active:index == num}" @click="tab(index)" :key="index">{{item.name}}</li>
   </ul>
@@ -20,13 +20,13 @@
 
 <script>
 import axios from "axios";
-import obj from "../../mock/test.js"
+import data from "../data/data.js"
 export default {
   name: "job",
   data() {
     return {
       num: 0,
-      job: obj||[]
+      job: data.obj||[]
     };
   },
   created() {
@@ -61,7 +61,16 @@ export default {
       });
 
     }
-  }
+  },
+  // beforeRouteLeave(to, from, next) {
+  //     if (to.path == "/index") {
+  //       to.meta.keepAlive = true;
+  //     } else {
+  //       to.meta.keepAlive = false;
+  //     }
+  //     next();
+  //   }
+
 };
 </script>
 

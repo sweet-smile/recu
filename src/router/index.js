@@ -10,12 +10,18 @@ export default new Router({
     {
       path: '/',
       name: 'Job',
-      component: Job
+      component: Job,
+      meta:{
+        title:'job',
+        keepAlive:true
+      }
     },
     {
       path: '/detail',
       name: 'Detail',
       component: Detail
     }
-  ]
+  ],
+
 })
+

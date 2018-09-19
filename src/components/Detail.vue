@@ -8,26 +8,49 @@
       <div class="split"></div>
       <div class="count">
         <span>岗位职级：{{detail.level}}</span>
-        <span>招聘人数：{{detail.count}}人</span>
+        <!-- <span>招聘人数：{{detail.count}}人</span> -->
       </div>
-      <p>岗位描述</p>
-      <p>{{detail.intro}}</p>
-      <p>岗位要求</p>
-      <p>{{detail.work}}</p>
+      <p class="intro">岗位描述</p>
+      <div class="intro-con">
+        <p  v-for="(item,index) in intro" :key="index">{{item}}{{index==intro.length-1?'。':'；'}}</p>
+      </div>
+      <p class="work">岗位要求</p>
+      <div class="work-con">
+        <p  v-for="(item,index) in work" :key="index">{{item}}{{index==work.length-1?'。':'；'}}</p>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import data from "../data/data"
 export default {
   data() {
     return {
       content: "",
-      detail: ""
+      detail: "",
+      intro:[],
+      work:[]
     };
   },
   created() {
-    this.getContent();
+    // this.getContent();
+     var num = this.$route.query.num;
+      var index = this.$route.query.index;
+      if(num==0){
+         this.content = data.objList1[index];
+      }
+      if(num==1){
+          this.content = data.objList2[index];
+      }
+      if(num==2){
+         this.content = data.objList3[index];
+      }
+      this.detail = this.content.detail[0];
+      var intro=this.detail.intro.split(';');
+      var work=this.detail.intro.split(';');
+     this.intro=intro;
+     this.work=work;
   },
   methods: {
     getContent() {
@@ -46,9 +69,7 @@ export default {
 };
 </script>
 <style scoped>
-.page {
 
-}
 .title {
   height: 4rem;
   display: flex;
@@ -57,7 +78,7 @@ export default {
   padding: 0.3rem 1rem;
 }
 .name {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #43add5;
   font-weight: 700;
 }
@@ -65,15 +86,28 @@ export default {
   color: #999;
   font-size: 0.8rem;
 }
-.content{
-}
+
 .split{
   height: .7rem;
-  background-color: #f3f3f3;
+  background-color:red;
 }
 .count{
   padding:0.8rem;
   display: flex;
   justify-content: space-between;
+  border-bottom:.01rem solid #eee;
+}
+.intro {
+  padding:.8rem;
+}
+.work{
+   padding:.8rem;
+}
+.intro-con{
+  padding:0 0.8rem 0.8rem;
+  border-bottom:.01rem solid #eee;
+}
+.work-con{
+  padding:0 0.8rem .8rem;
 }
 </style>
